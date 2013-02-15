@@ -68,8 +68,7 @@ define("ebookreader", ["require", "jquery", "ebookreader/gui", "ebookreader/epub
 	       if(options.ncxFile != null) {
 		   epub.readNCX(options, function(toc) {
 		       options['toc'] = toc;
-		       ebookgui.showIntro();
-		       // ebookgui.showTOC();
+		       ebookgui.showTOC();
 		   });
 	       }
 	   }
