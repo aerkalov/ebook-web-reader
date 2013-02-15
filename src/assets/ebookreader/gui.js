@@ -236,6 +236,7 @@ define("ebookreader/gui", ["require", "jquery", "bootstrap", "switch"],
 	       /* close the font dialog */
 	       jQuery("#textmodal .btn").click(function() {
 		   jQuery("#textmodal").modal('hide');
+		   return false;
 	       });
 
 
@@ -349,6 +350,12 @@ define("ebookreader/gui", ["require", "jquery", "bootstrap", "switch"],
 		   _showTOC(1);
 		   return false;
 	       });	
+
+	       jQuery("#footer A.infolink").click(function() {
+		   _showIntro();
+		   return false;
+	       });	
+
 	       
 	       /* day night switch */
 	       jQuery('#switchnight').on('switch-change', function (e, data) {
@@ -365,6 +372,7 @@ define("ebookreader/gui", ["require", "jquery", "bootstrap", "switch"],
 
 	       /* Set default css */
 	       setCSS();	       
+	       jQuery("A.bookmarklink").popover();
 	   }
 	   
 	   return {initUI: _initUI,
