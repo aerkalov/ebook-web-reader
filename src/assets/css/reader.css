@@ -13,7 +13,6 @@ A:visited .booktitle {
     color: #777;
 }
 
-
 #footer {
    position:fixed;
    left:0px;
@@ -25,6 +24,11 @@ A:visited .booktitle {
    z-index: 1000;
    background-color: #fafafa;
 }
+
+#footer A:hover.infolink, #footer A:visited.infolink {
+    text-decoration: none;
+}
+
 
 #footer A:visited.sharelink, #footer A:visited.printlink, #footer A:hover.sharelink, #footer A:hover.printlink {
     text-decoration: none;
