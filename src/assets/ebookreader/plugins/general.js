@@ -25,26 +25,27 @@ define("general", ["require", "jquery"],
 	   
 	   function _parseText(args) {
 	       var $data = args.data;
-	       
-	       jQuery("IMG", $data).each(function() {
-		   var $img = jQuery(this);
-		   $img.attr("src", args.bookURL+$img.attr("src"));
+
+	       jQuery($data.getElementsByTagName('img')).each(function() {
+		   var $elem = this;
+		   $elem.setAttribute("src", args.bookURL+$elem.getAttribute('src'));
 	       });
-	       
-	       jQuery("A", $data).each(function() {
-		   var $a = jQuery(this);
-		   var href = $a.attr("href");
-		   $a.attr("href", '?'+href);
-	       });
-	       
-	       jQuery("A", $data).click(function(event) {
-		   var $this = jQuery(this);
-		   var gui = require("ebookreader/gui");
+
+	       jQuery($data.getElementsByTagName('a')).each(function() {
+		   var $elem = this;
+		   var name  = $elem.getAttribute("href");
+
+		   // it should guess is it relative link, link to remote resource and etc...
 		   
-		   gui.showPage($this.attr("href"));
-		   
-		   return false;
-	       });
+		   $elem.setAttribute("href", "?"+name);
+
+		   $elem.addEventListener('click', function(event) {
+		       var gui = require("ebookreader/gui");		       
+		       gui.showPage(name);
+
+		       event.preventDefault();		       
+		   }, false);
+	       });	       
 	   }
 	   	   
 	   return {'info': {'name': 'General',

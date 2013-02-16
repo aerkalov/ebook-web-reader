@@ -89,32 +89,47 @@ define("ebookreader/gui", ["require", "jquery", "bootstrap", "switch"],
 	       } else {
 		   history.replaceState(e, pageID, "?"+e);	
 	       }
-	       
-	       jQuery.get(bookURL+e, function(data) {
-		   $iframe.unbind('click');
-		   var e = [];
-		   var $d = jQuery(data);
-		   
-		   for(var i = 0; i < $d.length; i++) {
-		       var name = $d[i].nodeName;
-		       if(name != 'TITLE' && name != 'LINK' && name != 'SCRIPT' && name != '#comment' && name != '#text') {
-			   e.push($d[i]);
+
+	       jQuery.ajax({
+		   type: 'GET', 
+		   url: bookURL+e,
+		   dataType: 'html',
+		   success: function(data) {	       
+		       $iframe.unbind('click');
+
+		       try {
+			   var parser=new DOMParser();
+			   var xmlDoc=parser.parseFromString(data,"text/xml");
+                       } catch(e) {
+			   alert(e.message);
+			   return;
+                       }
+		       var $data = xmlDoc.getElementsByTagName("body")[0];
+		       /*
+		       var e = [];
+		       
+		       for(var i = 0; i < $d.length; i++) {
+			   var name = $d[i].nodeName;
+			   if(name != 'TITLE' && name != 'LINK' && name != 'SCRIPT' && name != '#comment' && name != '#text') {
+			       e.push($d[i]);
+			   }
 		       }
-		   }
-		   
-		   var $data = jQuery(e);
-		   
-		   ebookreader.exec('parseText', {'data': $data, 
-						  'bookURL': bookURL});
-		   
-		   jQuery("BODY", $iframe).html($data);
-		   setTimeout(function() {
-		       setIframeHeight();
-		       jQuery(window).scrollTop(0);
+		       
+		       var $data = jQuery(e);
+		       */
+		       console.debug($data);
+		       ebookreader.exec('parseText', {'data': $data, 
+						      'bookURL': bookURL});
+		       
+		       jQuery("BODY", $iframe).html(jQuery($data));
+		       setTimeout(function() {
+			   setIframeHeight();
+			   jQuery(window).scrollTop(0);
 		       }, 200);
-		   
-		   return false;
-	       }, "html");	
+		       
+		       return false;
+		   }
+	       });	
 	   }
 	   
 	   
