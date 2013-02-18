@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Ebook reader</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Style -->
+    <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="assets/css/bootstrapSwitch.css" rel="stylesheet">
+    <link href="assets/css/mobile.css" rel="stylesheet">
+
+    <!-- Load require -->
+    <script data-main="assets/main" src="assets/require-jquery.js"></script>
+    <script>
+      require(["ebookreader"], function(ebookreader) {
+          ebookreader.configure({bookTitle: 'Booktype for Authors and Publishers',
+                                 bookURL: 'books/',
+                                 ncxFile: 'books/toc.ncx',
+                                 autoHide: false,
+                                 ui: 'ebookreader/plugins/mobile'
+                               });
+          ebookreader.init();
+      });
+      
+    </script>
+    <style id="localcss">
+    </style>
+  </head>
+  <body>
+
+<!-- start header -->
+<div class="navbar navbar-fixed-top">
+ <div class="navbar-inner"> 
+   <div class="container-fluid">
+    <div class="row-fluid" style="padding-top: 10px">  
+       <div class="span12" style="overflow: hidden">
+          <a  class="booktitle" href="#"></a>
+       </div>
+<!--
+       <div class="span5 text-right">
+         <a href="#" class="bookmarklink" rel="tooltip" data-content="This feature will be soon implemented." data-placement="bottom" data-toggle="tooltip" title="Bookmark this page"><i class="icon-bookmark"></i></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+         <a href="/" class="toc" rel="tooltip" data-placement="bottom" data-toggle="tooltip" title="Show table of contents"><i class="icon-th"></i> TABLE OF CONTENTS</a>
+       </div>
+-->
+    </div>
+   </div>
+ </div> 
+</div>
+<!-- end header -->
+
+
+<!-- start content -->
+<div style=" padding-right: 30px; padding-left: 30px;" id="textcontainer">
+ <div style="padding-top: 70px;"></div>  
+  <iframe id="page" name="page"  src="chapter.html" style="width: 100%;  border:0px; overflow: hidden;" frameborder="0" framemargin="0" scrolling="auto"></iframe>
+ <div style="padding-top: 70px;"></div>
+</div>
+<!-- end content -->
+
+<!-- start footer -->
+<div id="footer">
+  <div class="slidebar" style="height:150px;">
+  <div style="width: 50px; height: 50px; ">
+    <!-- TOC -->
+    <a class="linktoc" href="#"><i class="icon-th"></i></a>
+  </div>
+
+  <div style="width: 50px; height: 50px; ">
+    <!-- Font -->
+    <a class="linkfont" href="#"><i class="icon-font"></i></a>
+  </div>
+
+  <div style="width: 50px; height: 50px; ">
+    <!-- Font -->
+    <a class="linkinfo" href="#"><i class="icon-info-sign"></i></a>
+  </div>
+  </div>
+  <div style="width: 50px; height: 50px; ">
+    <a class="linkbook" href="#"><i class="icon-book"></i></a>
+  </div>
+</div>
+<!-- end footer -->
+
+
+<!-- start font dialog -->
+<div id="textmodal" class="modal hide fade">
+  <div class="modal-body">
+    <div class="container-fluid">
+
+      <!-- start color -->
+     <div class="row-fluid">
+      <div class="span12">
+        <div class="optiontitle"><strong>COLOR</strong></div>
+      </div>
+     </div>
+
+     <div class="row-fluid">
+
+      <div class="span3">
+        <div class="colorblock" style="background-color: white">
+        </div>
+      </div>
+
+      <div class="span3">
+        <div class="colorblock" style="background-color: #f4eed9">
+        </div>
+      </div>
+
+      <div class="span3">
+        <div class="colorblock" style="background-color: #edebe8">
+        </div>
+      </div>
+
+      <div class="span3">
+        <div class="colorblock" style="background-color: #f7f7f7">
+        </div>
+      </div>
+
+     </div>
+     <!-- end color -->
+
+      <!-- start font -->
+     <div class="row-fluid">
+      <div class="span12">
+        <div class="optiontitle"><strong>FONT</strong></div>
+      </div>
+     </div>
+
+     <div class="row-fluid">
+
+      <div class="span3">
+        <div class="fontblock" style="font-family: 'lucida grande','lucida sans unicode', sans-serif;">
+	  Abc
+        </div>
+      </div>
+
+      <div class="span3">
+        <div class="fontblock" style="font-family: Cambria, 'Hoefler Text', Georgia, 'Times New Roman', serif;">
+	  Abc
+        </div>
+      </div>
+
+      <div class="span3">
+        <div class="fontblock" style="font-family: Corbel, 'Helvetica Neue', Arial, sans-serif;">
+	  Abc
+        </div>
+      </div>
+
+      <div class="span3">
+        <div class="fontblock" style="font-family: 'minion-pro', Palatino, Georgia, serif;">
+	  Abc
+        </div>
+      </div>
+
+
+     </div>
+     <!-- end font -->
+
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <a href="#" class="btn">Close</a>
+  </div>
+</div>
+<!-- end font dialog -->
+
+  </body>
+</html>

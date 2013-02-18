@@ -16,7 +16,9 @@
  along with E-Book Web Reader.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-define("ebookreader", ["require", "jquery", "ebookreader/gui", "ebookreader/epub", "ebookreader/plugins/general"], 
+/* this entire require thing with plugins is very stupid */
+define("ebookreader", ["require", "jquery", "ebookreader/gui", "ebookreader/epub"], 
+
        function(require, jQuery, ebookgui, epub, b) {
 
 	   /* default options */
@@ -25,7 +27,8 @@ define("ebookreader", ["require", "jquery", "ebookreader/gui", "ebookreader/epub
 			  ncxFile: null,
 			  toc: null,
 			  autoHide: false,
-			  plugins: ["general"]
+			  ui: 'ebookreader/plugins/desktop',
+			  plugins: ['ebookreader/plugins/general', 'ebookreader/plugins/desktop', 'ebookreader/plugins/mobile']
 			 };
 
 	   /* list of initialized plugins */
@@ -37,13 +40,16 @@ define("ebookreader", ["require", "jquery", "ebookreader/gui", "ebookreader/epub
 	   }
 	   
 	   /* initialize plugins */
-	   function _initPlugins() {
+	   function _initPlugins(callback) {
 	       require(options.plugins, function() {
 		   for(var i=0; i < options.plugins.length; i++) {
 		       var pluginName = options.plugins[i];
+		       console.debug(pluginName);
+		       console.debug(arguments[i]);
 		       plugins[pluginName] = arguments[i];	    
 		       plugins[pluginName].init(options);	    
 		   }
+		   callback();
 	       });
 	   }
 	   
@@ -59,18 +65,20 @@ define("ebookreader", ["require", "jquery", "ebookreader/gui", "ebookreader/epub
 	   
 	   /* initialize e-book web reader */
 	   function _init() {
-	       _initPlugins();
+	       _initPlugins(function() {
 	       
-	       /* initialize gui */
-	       ebookgui.initUI(options);
-	       
-	       /* read the toc */
-	       if(options.ncxFile != null) {
-		   epub.readNCX(options, function(toc) {
-		       options['toc'] = toc;
-		       ebookgui.showTOC();
-		   });
-	       }
+		   /* initialize gui */
+		   //ebookgui.initUI(options, ebookgui);
+		   ebookgui.initUI(options, plugins[options.ui]);
+		   
+		   /* read the toc */
+		   if(options.ncxFile != null) {
+		       epub.readNCX(options, function(toc) {
+			   options['toc'] = toc;
+			   ebookgui.showTOC();
+		       });
+		   }
+	       });
 	   }
 	   
 	   /* set option */

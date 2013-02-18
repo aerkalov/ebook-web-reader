@@ -16,7 +16,7 @@
  along with E-Book Web Reader.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-define("general", ["require", "jquery"], 
+define("ebookreader/plugins/general", ["require", "jquery"], 
        function(require, jQuery) {
 
 	   function _init(options) {

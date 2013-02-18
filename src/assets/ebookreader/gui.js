@@ -205,123 +205,6 @@ define("ebookreader/gui", ["require", "jquery", "bootstrap", "switch"],
 	       jQuery(window).scrollTop(0);
 	   }
 
-	   /*****************************************************************************************/
-	   /* Open Font Option                                                                      */
-	   /*****************************************************************************************/	   
-	   
-	   function openFontOption() {
-	       jQuery("#textmodal").modal({'show': true,
-					   'backdrop': false,					
-					   'keyboard': false});	       
-	   }
-
-
-	   /*****************************************************************************************/
-	   /* Initialize Font Dialog                                                                */
-	   /*****************************************************************************************/	   
-
-	   function initFontDialog() {
-	       /* open font options */	       
-	       jQuery("#footer .fontoption").click(function() {
-		   openFontOption();
-		   return false;
-	       });
-	       
-	       /* choose the color */
-	       jQuery("#textmodal DIV.colorblock").click(function() {
-		   var $this = jQuery(this);
-		   var color = $this.css("background-color");
-		   
-		   cssStyle['background-color'] = color;
-		   setCSS();
-	       });
-	       
-	       jQuery("#textmodal DIV.fontblock").click(function() {
-		   var $this = jQuery(this);
-		   var font = $this.css("font-family");
-		   
-		   cssStyle['font-family'] = font;
-		   setCSS();
-	       });
-	       
-	       jQuery('#textmodal').on('show', function () {
-		   
-	       })
-
-	       /* close the font dialog */
-	       jQuery("#textmodal .btn").click(function() {
-		   jQuery("#textmodal").modal('hide');
-		   return false;
-	       });
-
-
-	   }
-
-
-	   /*****************************************************************************************/
-	   /* Auto Hide Event                                                                       */
-	   /*****************************************************************************************/	   
-
-	   function autoHideEvent(options) {
-
-	       /* AUTOHIDE */
-	       if(options.autoHide == true) {
-		   inProgress = true;
-		   jQuery("#footer").slideUp(function() {
-		       inProgress = false;
-		   });
-		   
-		   function _mousemove(e) {
-		       var diff = jQuery(window).innerHeight()-e.clientY;
-		       
-                       if(!inProgress) {
-			   if(diff < 190) {
-                               inProgress = true;
-                               jQuery("#footer").slideDown(function() {
-				   inProgress = false;
-                               });
-			   } else {
-                               inProgress = true;
-                               jQuery("#footer").slideUp(function() {
-				   inProgress = false;
-                               });
-			   }
-                       }
-		   }
-		   
-		   jQuery(document).mousemove(_mousemove);
-		   jQuery("#page").contents().mousemove(_mousemove);
-	       }
-
-	   }
-
-
-	   /*****************************************************************************************/
-	   /* Keydown   Event                                                                       */
-	   /*****************************************************************************************/	   
-
-	   function keydownEvent(options) {
-	       function _keydown(event) {
-		   if(event.type == 'keydown') {
-		       if(event.which == 84)
-			   _showTOC(1);
-		       
-		       if(event.which == 70)
-			   openFontOption();
-		       
-		       if(event.which == 66)
-			   history.back();
-		   }
-		   /*
-		     console.debug("pressed");
-		     console.debug(event.type);
-		     console.debug(event.which);
-		   */
-	       }
-	       
-	       jQuery(document).bind('keydown', _keydown);
-	       jQuery("#page").contents().bind('keydown', _keydown);	       
-	   }
 
 	   /*****************************************************************************************/
 	   /* History Event                                                                        */
@@ -347,51 +230,21 @@ define("ebookreader/gui", ["require", "jquery", "bootstrap", "switch"],
 	   /* Initialize UI                                                                         */
 	   /*****************************************************************************************/	   
 	   
-	   function _initUI(options) {	       
+	   function _initUI(options, plgn) {	       
+	       plgn.initUI(options);
 
-	       /* Initialize all tooltips */
-	   	jQuery("[rel='tooltip']").tooltip();
-    
-	       jQuery("DIV.navbar A.booktitle").html(options.bookTitle);
-	       
-	       jQuery("DIV.navbar A.toc").click(function() {
-		   /* open table of contents */
-		   _showTOC(1);
-		   return false;
-	       });	
-
-	       jQuery("DIV.navbar A.booktitle").click(function() {
-		   /* open table of contents */
-		   _showTOC(1);
-		   return false;
-	       });	
-
-	       jQuery("#footer A.infolink").click(function() {
-		   _showIntro();
-		   return false;
-	       });	
-
-	       
-	       /* day night switch */
-	       jQuery('#switchnight').on('switch-change', function (e, data) {
-		   var value = data.value;
-		   isDay = !value;
-		   setCSS();
-	       });
-	       
-	       initFontDialog();
-
-	       autoHideEvent(options);
-	       keydownEvent(options);	       
 	       historyEvent();
 
 	       /* Set default css */
 	       setCSS();	       
-	       jQuery("A.bookmarklink").popover();
 	   }
 	   
 	   return {initUI: _initUI,
 		   showIntro: _showIntro,
 		   showTOC: _showTOC,
-		   showPage: _showPage};
+		   showPage: _showPage,
+		   setCSS: setCSS,
+		   isDay: isDay,
+		   cssStyle: cssStyle,
+		   historyEvent: historyEvent};
        });
