@@ -16,8 +16,8 @@
  along with E-Book Web Reader.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-define("ebookreader/plugins/general", ["require", "jquery"], 
-       function(require, jQuery) {
+define("ebookreader/plugins/general", ["require", "jquery", "purl"], 
+       function(require, jQuery, purl) {
 
 	   function _init(options) {
 
@@ -34,17 +34,50 @@ define("ebookreader/plugins/general", ["require", "jquery"],
 	       jQuery($data.getElementsByTagName('a')).each(function() {
 		   var $elem = this;
 		   var name  = $elem.getAttribute("href");
+		   var url = purl(name);
+		   console.debug(typeof name);
+		   console.debug('----------------------------------');
+		   console.debug(name);
+		   console.debug('protocol '+url.attr('protocol'));
+		   console.debug('relative '+url.attr('relative')); // ovaj je bitan
+		   console.debug('path '+url.attr('path'));
+		   console.debug('file '+url.attr('file'));
+		   console.debug('directory '+url.attr('directory'));
 
-		   // it should guess is it relative link, link to remote resource and etc...
-		   
-		   $elem.setAttribute("href", "?"+name);
+		   console.debug('fragment '+url.attr('fragment'));
 
-		   $elem.addEventListener('click', function(event) {
-		       var gui = require("ebookreader/gui");		       
-		       gui.showPage(name);
+		   if(url.attr('protocol') == '') {
+		       if(url.attr('relative') != '') {
+			   // '#something'
+			   var n = name.indexOf(url.attr('relative'));
+			   if( n == 0) {
+			       $elem.setAttribute("href", url.attr('relative'));			   
+			   } else { //page#something
+			       var pageName = name.substring(0, n-1);
+			       
+			       $elem.setAttribute("href", "?"+pageName);
 
-		       event.preventDefault();		       
-		   }, false);
+			       $elem.addEventListener('click', function(event) {
+				   var gui = require("ebookreader/gui");		       
+				   gui.showPage(name);
+				   
+				   event.preventDefault();		       
+			       }, false);
+			       
+			   }
+		       } else {
+			   $elem.setAttribute("href", "?"+name);
+			   
+			   $elem.addEventListener('click', function(event) {
+			       var gui = require("ebookreader/gui");		       
+			       gui.showPage(name);
+			       
+			   event.preventDefault();		       
+			   }, false);
+		       }
+		   } else {
+		       $elem.setAttribute("target", "_blank");
+		   }
 	       });	       
 	   }
 	   	   

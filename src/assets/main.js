@@ -3,10 +3,11 @@ require.config({
     paths: {
 	'jquery': 'js/jquery',
 	'bootstrap': 'js/bootstrap.min',
-	'switch': 'js/bootstrapSwitch'
+	'switch': 'js/bootstrapSwitch',
+	'purl': 'js/purl'
     },
     shim: {
-	'bootstrap': ['jquery']
+	'bootstrap': ['jquery', 'purl']
     } 
 });
 
