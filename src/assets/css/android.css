@@ -1,0 +1,182 @@
+.booktitle {
+    display: block;
+    float: left;
+    /* padding: 10px 20px 10px;
+       margin-left: -20px; */
+    font-size: 20px;
+    font-weight: 200;
+    color: #777;
+    text-shadow: 0 1px 0 #fff;
+}
+
+A:visited .booktitle {
+    color: #777;
+}
+
+#footer {
+   position:fixed;
+/*   left:0px; */
+   bottom:0px;
+   right: 0px;
+   height: 200px;
+   width: 100;
+   z-index: 1000;
+}
+
+#footer A:hover.infolink, #footer A:visited.infolink {
+    text-decoration: none;
+}
+
+
+#footer A:visited.sharelink, #footer A:visited.printlink, #footer A:hover.sharelink, #footer A:hover.printlink {
+    text-decoration: none;
+}
+
+/* IE 6 */
+* html #footer {
+   position:absolute;
+   top:expression((0-(footer.offsetHeight)+(document.documentElement.clientHeight ? document.documentElement.clientHeight : document.body.clientHeight)+(ignoreMe = document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop))+'px');
+}
+
+BODY {
+}
+
+
+#textcontainer {
+    padding-right: 20px;
+    padding-left: 20px;
+    width: 70%;
+    margin-left: auto ;
+    margin-right: auto ;    
+}
+
+#textcontainer > div.spacing {
+    padding-top: 70px;
+}
+
+IFRAME {
+
+}
+
+
+.bookannot {
+    border:1px solid #808080;
+    border-radius:3px;
+    background-color: #FfCc99;
+
+    font-size: 8px;
+    line-height: 120%;
+
+    padding: 2px;
+
+    overflow: hidden;
+}
+
+
+DIV.navbar A.toc:visited, DIV.navbar A.toc {
+    color: black;
+    text-decoration: none;
+}
+
+#footer A.fontoption:visited, #footer A.fontoption {
+    color: black;
+    text-decoration: none;
+}
+
+
+#toc OL > LI > OL {list-style-type:square; }
+/* OVO MOJE */
+
+
+/* i sad ovaj */
+
+#textcontainer { 
+/*    font:1em/1.625em "lucida grande","lucida sans unicode", sans-serif; background-color:#FFFEF0;   */
+    font:1.2em/1.825em "lucida grande","lucida sans unicode", sans-serif; white;  
+
+    font-size-adjust:none;
+    font-style:normal;
+    font-variant:normal;
+    font-weight:normal;
+}
+
+
+#textmodal .colorblock {
+    border: 1px solid black;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+
+#textmodal .fontblock {
+    text-align: left;
+    font-size: 24px;
+    padding: 5px;
+    cursor: pointer;
+    vertical-align: middle;
+
+}
+
+#textmodal .optiontitle {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+iframe::-webkit-scrollbar {    display: none; }
+
+#debug {
+    width: 80%;
+    height: 200px;
+    overflow: scroll;
+}
+
+#footer {
+   position:fixed;
+   left:0px;
+   bottom:0px;
+   right: 0px;
+   height:40px;
+   width:100%;
+   border-top: 1px solid #c0c0c0;
+   z-index: 1000;
+   background-color: #fafafa;
+}
+
+#footer A:hover.infolink, #footer A:visited.infolink {
+    text-decoration: none;
+}
+
+
+#footer A:visited.sharelink, #footer A:visited.printlink, #footer A:hover.sharelink, #footer A:hover.printlink {
+    text-decoration: none;
+}
+
+/* IE 6 */
+* html #footer {
+   position:absolute;
+   top:expression((0-(footer.offsetHeight)+(document.documentElement.clientHeight ? document.documentElement.clientHeight : document.body.clientHeight)+(ignoreMe = document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop))+'px');
+}
+
+
+
+@media (min-width: 500px) { 
+  #textcontainer { 
+     width: 90%;
+ }
+}
+
+@media (min-width: 800px) { 
+  #textcontainer { 
+     width: 80%;
+ }
+}
+
+@media (min-width: 1200px) { 
+  #textcontainer { 
+     width: 70%;
+ }
+}
+
+
+
+

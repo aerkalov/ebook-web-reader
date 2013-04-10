@@ -28,7 +28,7 @@ define("ebookreader", ["require", "jquery", "ebookreader/gui", "ebookreader/epub
 			  toc: null,
 			  autoHide: false,
 			  ui: 'ebookreader/plugins/desktop',
-			  plugins: ['ebookreader/plugins/general', 'ebookreader/plugins/desktop', 'ebookreader/plugins/mobile']
+			  plugins: ['ebookreader/plugins/general', 'ebookreader/plugins/desktop', 'ebookreader/plugins/mobile', 'ebookreader/plugins/android']
 			 };
 
 	   /* list of initialized plugins */

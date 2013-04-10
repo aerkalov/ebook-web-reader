@@ -20,13 +20,13 @@ define("ebookreader/gui", ["require", "jquery", "bootstrap", "switch"],
        function(require, jQuery, bootstrap, switchGui) {
 	   var inProgress = false; /* auto hide is in progress */
 	   var isDay = true;       /* day or night */
-	   
+
 	   /* default options */
 	   var cssStyle = {
 	       'background-color': 'white',
 	       'font-family': " 'lucida grande','lucida sans unicode', sans-serif"
 	   }
-	   
+
 	   /*****************************************************************************************/
 	   /* Set iframe size                                                                       */
 	   /*****************************************************************************************/
@@ -121,7 +121,12 @@ define("ebookreader/gui", ["require", "jquery", "bootstrap", "switch"],
 		       ebookreader.exec('parseText', {'data': $data, 
 						      'bookURL': bookURL});
 		       
-		       jQuery("BODY", $iframe).html(jQuery($data));
+		       jQuery("BODY", $iframe).html(jQuery($data).children());
+
+		       $iframe.ready(function() {
+
+
+		       });
 		       setTimeout(function() {
 			   setIframeHeight();
 			   jQuery(window).scrollTop(0);
